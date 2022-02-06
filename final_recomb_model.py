@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-
+#yoooooo
 def igdna(length):
     dna1,dna2,dna3 = "", "", ""
     for count in range(length):
@@ -82,7 +82,7 @@ def tot_fitness(gene_l1, gene_l2, w_gene):
     w2c=fitness(gene2c,w_gene[2])
     w2d=fitness(gene2d,w_gene[3])
     lw=[np.average([w1b,w2b]),np.average([w1c,w2c]),np.average([w1d,w2d])]
-    tot_w=np.average(lw) 
+    tot_w=np.average(lw)
     if gene1a != 'ATGC' and gene1a != 'ATAT':
         tot_w=0
     if gene2a != 'ATGC' and gene2a != 'ATAT':
@@ -93,7 +93,7 @@ def intiate_pop(n,mu,w_gene):
     l1_gene1, l1_gene2, l1_gene3, l1_gene4 =[], [], [], []
     l2_gene1, l2_gene2, l2_gene3, l2_gene4 =[], [], [], []
     for i in range(n):
-        l1_gene1+=['ATAT']    
+        l1_gene1+=['ATAT']
         l1_gene2+=[mutate(w_gene[1],mu)]
         l1_gene3+=[mutate(w_gene[2],mu)]
         l1_gene4+=[mutate(w_gene[3],mu)]
@@ -185,7 +185,7 @@ def fecundity(l_pair, lw):
             tot_fec+=[l_fec]
     return tot_fec
 
-def final_eggs(eggs,n): 
+def final_eggs(eggs,n):
     f_concate=np.concatenate(eggs)
     #print(f_concate, sum(f_concate))
     while sum(f_concate)>n:
@@ -194,7 +194,7 @@ def final_eggs(eggs,n):
             f_concate[i]=f_concate[i]-1
     #print(f_concate, sum(f_concate))
     final_eggs=[]
-    
+
     counter=0
     for i in range(len(eggs)):
         lf=f_concate[counter:counter+len(eggs[i])]
@@ -224,7 +224,7 @@ def timeseries(n,imu,gen,new_rf,mut,w_gene):
         l_pair=mating_pairs(n_mate, female_index,male_index)
         eggs=fecundity(l_pair,l[2])
         f_eggs=final_eggs(eggs,n)
-     
+
         lrecomb=[]
         for i in range(n):
             if np.random.uniform()<rf:
@@ -244,7 +244,7 @@ def timeseries(n,imu,gen,new_rf,mut,w_gene):
             for j in range(len(f_eggs[i])):
                 for k in range(f_eggs[i][j]):
                     l_offs_parents+=[[l_pair[i][0],l_pair[i][1][j]]]
-        
+
         l1,l2,lw,ltot_w=[],[],[],[]
         for i in range(len(l_offs_parents)):
             dam_i=l_offs_parents[i][0]
@@ -266,7 +266,7 @@ def timeseries(n,imu,gen,new_rf,mut,w_gene):
                     g2=recombination(str(l[og1][dam_i]),str(l[og2][sire_i]),nrecomb)[recg]
             l1+=[mutate(g1,int(mut*len(g1)))]
             l2+=[mutate(g2,int(mut*len(g2)))]
-    
+
         for i in range(n):
             w=tot_fitness(l1[i],l2[i],w_gene)
             ltot_w+=[w[1]]
@@ -278,7 +278,7 @@ def timeseries(n,imu,gen,new_rf,mut,w_gene):
             lw2+=[lw[i][0]]
             lw3+=[lw[i][1]]
             lw4+=[lw[i][2]]
-        
+
         lw2_out_mean+=[np.average([lw2])]
         lw3_out_mean+=[np.average([lw3])]
         lw4_out_mean+=[np.average([lw4])]
@@ -302,10 +302,10 @@ w_gene=[wgene1,wgene2,wgene3,wgene4]
 
 for r in np.arange(0,1.1,0.1):
     rf=np.round(r,1)
-    l_out=timeseries(n,imu,gen,rf,mut,w_gene)   
-    
-    def plot_w_score(l_out,gen):   
-        w_score_df=pd.DataFrame(dict(g2_mean=l_out[1][0],g3_mean=l_out[1][1],g4_mean=l_out[1][2],g2_std=l_out[2][0],g3_std=l_out[2][1],g4_std=l_out[2][2],gen=range(gen)))           
+    l_out=timeseries(n,imu,gen,rf,mut,w_gene)
+
+    def plot_w_score(l_out,gen):
+        w_score_df=pd.DataFrame(dict(g2_mean=l_out[1][0],g3_mean=l_out[1][1],g4_mean=l_out[1][2],g2_std=l_out[2][0],g3_std=l_out[2][1],g4_std=l_out[2][2],gen=range(gen)))
         sns.set_style("darkgrid")
         ax1 = sns.lineplot(x="gen", y="g2_mean", data=w_score_df)
         ax1.fill_between(w_score_df["gen"], y1=w_score_df["g2_mean"] - (w_score_df["g2_std"]/np.sqrt(n)), y2=w_score_df["g2_mean"] + (w_score_df["g2_std"]/np.sqrt(n)), alpha=.3)
@@ -319,76 +319,76 @@ for r in np.arange(0,1.1,0.1):
         plt.tight_layout()
         plt.savefig('H:\sim\w_score1_rf_'+str(rf)+'.png')
         plt.close()
-    
+
     def genomes_txt_raw(l_out):
         genome1_data, genome2_data=[],[]
         for i in range(gen):
             genome1_data+=[l_out[0][i][0]]
-            genome2_data+=[l_out[0][i][1]]    
-        
+            genome2_data+=[l_out[0][i][1]]
+
         with open('genome1_rf_'+str(rf)+'.txt', 'w') as f:
             for i in range(len(genome1_data)):
                 if i<10:
                     f.write('gen'+str(0)+str(i)+'\n'+str(genome1_data[i])+'\n')
                 else:
                     f.write('gen'+str(i)+'\n'+str(genome1_data[i])+'\n')
-        
+
         with open('genome2_rf_'+str(rf)+'.txt', 'w') as g:
             for i in range(len(genome2_data)):
                 if i<10:
                     g.write('gen'+str(0)+str(i)+'\n'+str(genome2_data[i])+'\n')
                 else:
                     g.write('gen'+str(i)+'\n'+str(genome2_data[i])+'\n')
-    
+
     def fasta_format_all(gen, n, l_out):
         l1_gen=l_out[0][gen][0]
         l2_gen=l_out[0][gen][1]
-        
+
         with open('genome_'+str(gen)+'_all_rf_'+str(rf)+'.fas', 'w') as f:
             for i in range(n):
                 f.write('>No'+str(i)+'a\n'+l1_gen[i]+'\n')
                 f.write('>No'+str(i)+'b\n'+l2_gen[i]+'\n')
-    
+
     def fasta_format_gene2(gen, n, l_out):
         l1_gen=l_out[0][gen][0]
         l2_gen=l_out[0][gen][1]
-        
+
         with open('genome_'+str(gen)+'_gene2_rf_'+str(rf)+'.fas', 'w') as f:
             for i in range(n):
                 f.write('>No'+str(i)+'a\n'+l1_gen[i][184:364]+'\n')
-                
+
                 f.write('>No'+str(i)+'b\n'+l2_gen[i][184:364]+'\n')
-                
+
     def fasta_format_gene3(gen, n, l_out):
         l1_gen=l_out[0][gen][0]
         l2_gen=l_out[0][gen][1]
-        
+
         with open('genome_'+str(gen)+'_gene3_rf_'+str(rf)+'.fas', 'w') as f:
             for i in range(n):
                 f.write('>No'+str(i)+'a\n'+l1_gen[i][544:724]+'\n')
                 f.write('>No'+str(i)+'b\n'+l2_gen[i][544:724]+'\n')
-    
+
     def fasta_format_gene4(gen, n, l_out):
         l1_gen=l_out[0][gen][0]
         l2_gen=l_out[0][gen][1]
-        
+
         with open('genome_'+str(gen)+'_gene4_rf_'+str(rf)+'.fas', 'w') as f:
             for i in range(n):
                 f.write('>No'+str(i)+'a\n'+l1_gen[i][904:1084]+'\n')
                 f.write('>No'+str(i)+'b\n'+l2_gen[i][904:1084]+'\n')
-    
+
     def fasta_format_intergene(gen, n, l_out):
         l1_gen=l_out[0][gen][0]
         l2_gen=l_out[0][gen][1]
-        
+
         with open('genome_'+str(gen)+'_intergene_rf_'+str(rf)+'.fas', 'w') as f:
             for i in range(n):
                 f.write('>No'+str(i)+'a\n'+l1_gen[i][4:184]+l1_gen[i][364:544]+l1_gen[i][724:904]+'\n')
                 f.write('>No'+str(i)+'b\n'+l2_gen[i][4:184]+l2_gen[i][364:544]+l2_gen[i][724:904]+'\n')
-      
-    plot_w_score(l_out,gen)  
-    genomes_txt_raw(l_out)        
-    fasta_format_all(49,n,l_out)            
+
+    plot_w_score(l_out,gen)
+    genomes_txt_raw(l_out)
+    fasta_format_all(49,n,l_out)
     fasta_format_gene2(49,n,l_out)
     fasta_format_gene3(49,n,l_out)
     fasta_format_gene4(49,n,l_out)
