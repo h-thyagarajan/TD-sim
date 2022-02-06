@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-#yoooooo
+#etr
 def igdna(length):
     dna1,dna2,dna3 = "", "", ""
     for count in range(length):
