@@ -1,0 +1,11 @@
+rm(list = ls())
+library(tidyverse)
+library(ape)
+library(pegas)
+library(PopGenome)
+file.show("example.fas")
+mydna <- read.dna("example.fas", format = "fasta")
+myalign <- as.alignment(mydna)
+myalign$seq
+alview(mydna)
+base.freq(mydna)
