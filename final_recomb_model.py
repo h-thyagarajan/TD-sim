@@ -299,7 +299,7 @@ wgene2="AATTTCGCCGACGTGATGACATTCCAGGCAGTGCCTCTGCCGCCGGACCCCTCTCGTGATTGGGTAGCTGGA
 wgene3="GATAACTCCGTAATTGACTACGCGTTCCTCTAGACCTTACTTGACCGGATACAGTGTCTTTGACACGTTTATGGGTTACAGCAATCACATCCAAGACTGGCTATGCACGAAGCAACTCTTGAGTGTTAAAATGTTGACCCCTGTATTTGGGATGCGGGTAGTAGATGAGTGCAGGGACTC"
 wgene4="CGAGGTCAAGTACATTACCCTCTCATAGGGGGCGTTCTAGATCACGTTACCACCATATCATTCGAGCATGACACCATCTCCGCTGTGCCCATCCTAGTAGTCATTATTCCTATCACGCTTTCGAGTGTCTGGTGGCGGATATCCCCCACGAATGAAAATGTTTTTCGCTGACAGTCATAT"
 w_gene=[wgene1,wgene2,wgene3,wgene4]
-
+l_out=timeseries(n,imu,gen,0.1,mut,w_gene)
 for r in np.arange(0,1.1,0.1):
     rf=np.round(r,1)
     l_out=timeseries(n,imu,gen,rf,mut,w_gene)
@@ -386,10 +386,10 @@ for r in np.arange(0,1.1,0.1):
                 f.write('>No'+str(i)+'a\n'+l1_gen[i][4:184]+l1_gen[i][364:544]+l1_gen[i][724:904]+'\n')
                 f.write('>No'+str(i)+'b\n'+l2_gen[i][4:184]+l2_gen[i][364:544]+l2_gen[i][724:904]+'\n')
 
-    plot_w_score(l_out,gen)
-    genomes_txt_raw(l_out)
-    fasta_format_all(49,n,l_out)
-    fasta_format_gene2(49,n,l_out)
-    fasta_format_gene3(49,n,l_out)
-    fasta_format_gene4(49,n,l_out)
-    fasta_format_intergene(49,n,l_out)
+#    plot_w_score(l_out,gen)
+#    genomes_txt_raw(l_out)
+#    fasta_format_all(49,n,l_out)
+#    fasta_format_gene2(49,n,l_out)
+#    fasta_format_gene3(49,n,l_out)
+#    fasta_format_gene4(49,n,l_out)
+#    fasta_format_intergene(49,n,l_out)
