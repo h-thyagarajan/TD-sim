@@ -4,14 +4,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-def igdna(length):
-    dna1,dna2,dna3 = "", "", ""
-    for count in range(length):
-        dna1+=random.choice("CGTA")
-        dna2+=random.choice("CGTA")
-        dna3+=random.choice("CGTA")
-    return dna1,dna2,dna3
-
 def score_match(subject, query):
     score = 0
     for i in range(0,len(subject)):
