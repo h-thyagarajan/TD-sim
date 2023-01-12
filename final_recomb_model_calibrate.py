@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-
 def score_match(subject, query):
     score = 0
     for i in range(0,len(subject)):
